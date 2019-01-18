@@ -1,11 +1,14 @@
 module.exports.login = function(request, response) {
     response.status(200).json({
-        login: 'from controller'
-    })
+        login: {
+            email: request.body.email ,
+            password: request.body.password
+        }
+    }) 
 }
 
-module.exports.registr = function(request, response) {
+module.exports.register = function(request, response) {
     response.status(200).json({
-        registr: 'from controller'
+        register: 'from controller'
     })
 } 
