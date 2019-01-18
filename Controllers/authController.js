@@ -4,7 +4,7 @@ module.exports.login = function(request, response) {
             email: request.body.email ,
             password: request.body.password
         }
-    }) 
+    })
 }
 
 module.exports.register = function(request, response) {
