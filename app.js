@@ -12,7 +12,9 @@ const orderRoutes = require('./Routes/order')
 const positionRoutes = require('./Routes/position')
 const app = express()
 
-mongoose.connect(keys.mongoURL, { useNewUrlParser: true })
+//{ useNewUrlParser: true, useCreateIndex: true } - настройки для исключения пердупреждений версионности
+mongoose.connect(keys.mongoURL, { useNewUrlParser: true,
+    useCreateIndex: true })
     .then(() => {
         console.log('MongoDB connected')
     }).catch(error => {

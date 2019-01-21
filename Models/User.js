@@ -13,4 +13,5 @@ const userSchema = new Schema({
     }    
 })
 
+//"users" - так будет называться поле в базе данных на сервере
 module.exports = mongoose.model('users', userSchema)
