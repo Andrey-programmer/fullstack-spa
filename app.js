@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const passport = require('passport')
 
 const keys = require('./config/keys')
 const authRoutes = require('./Routes/auth')
@@ -20,6 +21,9 @@ mongoose.connect(keys.mongoURL, { useNewUrlParser: true,
     }).catch(error => {
         console.log(error)
     })
+
+app.use(passport.initialize())
+require('./Middleware/passport')(passport)
 
 app.use(morgan('dev')) //говорит о том что мы находимся в режиме разработки
 app.use(bodyParser.urlencoded({extended: true}))//Позволяет правильно парсить символы в URL-адресе

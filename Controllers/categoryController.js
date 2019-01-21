@@ -1,5 +1,7 @@
 module.exports.getAllCategories = function(request, response) {
-    
+    response.json({
+        message: 'Categories'
+    })
 }
 module.exports.getCategoryByID = function(request, response) {
     
