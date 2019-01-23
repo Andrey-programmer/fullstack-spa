@@ -34,11 +34,19 @@ module.exports.deleteCategory = async function(request, response) {
     }
 }
 
-module.exports.createCategory = function(request, response) {
+module.exports.createCategory = async function(request, response) {
+    // console.log(request.user)
+    const category = new Category({
+        name: request.body.name,
+        user: request.user.id,
+        imageSrc: request.file ? request.file.path : ''
+    })
+    
     try {
-
+        await category.save(category)
+        response.status(201).json(category)
     } catch(error) {
-        errorHandler(response, e)
+        errorHandler(response, error)
     }
 }
 
