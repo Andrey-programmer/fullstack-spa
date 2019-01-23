@@ -43,20 +43,30 @@ module.exports.createCategory = async function(request, response) {
     })
     
     try {
-        await category.save(category)
+        await category.save(category) 
         response.status(201).json(category)
     } catch(error) {
         errorHandler(response, error)
     }
 }
 
-module.exports.getAllCategory = function(request, response) {
-    try {
+module.exports.updateCategory = async function(request, response) {
+    const updated = {
+        name: request.body.name
+    }
 
+    if (request.file) {
+        updated.imageSrc = request.file.path
+    }
+
+    try {
+        const category = await Category.findOneAndUpdate(
+            {_id: request.params.id},
+            {$set: updated},
+            {new: true}
+        )
+        response.status(200).json(category)
     } catch(error) {
         errorHandler(response, e)
     }
-}
-module.exports.updateCategory = function(request, response) {
-    
 }
