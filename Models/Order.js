@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const orderSchema = new Schema({
     date: {
         type: Date,
-        default: Date.now// не вызываем метод
+        default: Date.now// не вызываем метод время добавляется автоматически
     },
     order: {
         type: Number,
