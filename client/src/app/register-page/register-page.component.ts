@@ -4,6 +4,7 @@ import { AuthService } from '../shared/services/auth.service'
 import { User } from '../shared/interfaces/interfaces'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
+import { MaterialService } from '../shared/services/material.service';
 
 @Component({
   selector: 'app-register-page',
@@ -35,6 +36,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     error => {
       console.log(JSON.stringify(error.error.message))
         //Включаем форму если ошибка авторизации
+        MaterialService.toast(error.error.message)
         this.form.enable()
     })
   }

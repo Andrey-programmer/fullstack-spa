@@ -5,6 +5,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { User } from '../shared/interfaces/interfaces';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MaterialService } from '../shared/services/material.service';
 
 @Component({
   selector: 'app-login-page',
@@ -32,9 +33,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
         // Теперь вы можете войти в систему, используя свои данные
-        console.log()
+        MaterialService.toast('Теперь вы можете войти в систему')
       } else if (params['accessDenied']) {
         // Пожалуйста, авторизуйтесь в системе!
+        MaterialService.toast('Авторизуйтесь в системе')
       }
     })
   }
@@ -56,8 +58,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         console.log('Login success')
       },
       (error) => {
-        
-        console.log(JSON.stringify(error.error.message))
+        MaterialService.toast(error.error.message)
+        // console.log(JSON.stringify(error.error.message))
         //Включаем форму если ошибка авторизации
         this.form.enable()
       } 
