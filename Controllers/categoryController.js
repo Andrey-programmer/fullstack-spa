@@ -16,9 +16,9 @@ module.exports.getCategoryByID = async function(request, response) {
     try {
         // кроме удаления категории нужно удалить позициии, принадлежащие данной категории
         const category = await Category.findById(request.params.id)
-        response.status(200).json(categories)
+        response.status(200).json(category)
     } catch(error) {
-        errorHandler(response, e)
+        errorHandler(response, error)
     }
 }
 
