@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { of } from 'rxjs'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators'
 
 import { CategoriesService } from 'src/app/shared/services/categories.service'
 import { MaterialService } from 'src/app/shared/services/material.service'
+import { Category } from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-categories-form',
@@ -14,8 +15,13 @@ import { MaterialService } from 'src/app/shared/services/material.service'
 })
 export class CategoriesFormComponent implements OnInit {
 
+  @ViewChild('imageLoader') inputRef: ElementRef
+
   form: FormGroup
   isNew = true
+  image: File
+  imagePreview: any
+
   constructor(private route: ActivatedRoute, private categoriesService: CategoriesService) { }
 
   ngOnInit() {
@@ -46,12 +52,13 @@ export class CategoriesFormComponent implements OnInit {
         )
       )
       .subscribe(
-        category => {
+        (category: Category) => {
           // console.log("Category", category)
           if(category) {
             this.form.patchValue({
               name: category.name
             })
+            this.imagePreview = category.imageSrc 
             MaterialService.updateTextInputs()
           }
           this.form.enable()
@@ -62,6 +69,25 @@ export class CategoriesFormComponent implements OnInit {
 
   onSubmit() {
     
+  }
+
+  loadImage() {
+    this.inputRef.nativeElement.click()
+  }
+
+  onImageUpload(event: any) {
+    const file = event.target.files[0]
+    this.image = file
+
+    // Создаем объект ридера
+    const reader = new FileReader()
+    
+    reader.readAsDataURL(file)  //Помещаем в него файл
+    // Кидаем загруженный файлы в Превьюху
+    reader.onload = () => {
+      this.imagePreview = reader.result
+    }
+ 
   }
 
 }
