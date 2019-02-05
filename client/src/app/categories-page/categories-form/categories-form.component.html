@@ -54,7 +54,7 @@
         type="submit"
         [disabled]="form.invalid || form.disabled"
       >
-        Сохранить изменения
+        {{isNew ? 'Добавить категорию': 'Сохранить изменения'}}
       </button>
     </div>
   </form>

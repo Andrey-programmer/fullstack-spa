@@ -21,6 +21,7 @@ export class CategoriesFormComponent implements OnInit {
   isNew = true
   image: File
   imagePreview: any
+  category: Category
 
   constructor(private route: ActivatedRoute, private categoriesService: CategoriesService) { }
 
@@ -46,15 +47,16 @@ export class CategoriesFormComponent implements OnInit {
               this.isNew = false
               return this.categoriesService.getCategoryById(params['id'])
             } else {
-              return of(null)
+              return of(null)//of  - превращает любые данные в Observable
             }
           }
         )
       )
       .subscribe(
         (category: Category) => {
-          // console.log("Category", category)
+          // console.log("Category", category) 
           if(category) {
+            this.category = category
             this.form.patchValue({
               name: category.name
             })
@@ -68,7 +70,24 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    let obs$
+    this.form.disable()
+    if(this.isNew) {
+      obs$ = this.categoriesService.createCategory(this.form.value.name, this.image)
+    } else {
+      obs$ = this.categoriesService.updateCategory(this.category._id, this.form.value.name, this.image)
+    }
+
+    obs$.subscribe(
+      (category: Category) => {
+        this.category = category
+        MaterialService.toast(this.isNew ? 'Категория добавлена':'Изменения сохранены')
+        this.form.enable()
+      },
+      (error) => {
+        MaterialService.toast(error.error.message)
+      }
+    )
   }
 
   loadImage() {
