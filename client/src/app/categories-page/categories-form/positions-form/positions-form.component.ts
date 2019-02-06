@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, OnDestr
 import { PositionsService } from 'src/app/shared/services/positions.service'
 import { MaterialService, ModalOptions } from 'src/app/shared/services/material.service'
 import { Position } from 'src/app/shared/interfaces/interfaces'
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-positions-form',
@@ -17,10 +18,16 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
   positions: Position[] = []
   loading = false
   modal: ModalOptions
+  form: FormGroup
 
   constructor(private positionService: PositionsService) { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      cost: new FormControl(null, [Validators.required, Validators.min(1)])
+    })
+
     this.loading = true
     this.positionService.getAllPositions(this.categoryId)
     .subscribe(
@@ -48,6 +55,14 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   onCancel() {
     this.modal.close()
+  }
+
+  onSubmit() {
+
+  }
+
+  onDeletePosition() {
+    
   }
 
   ngOnDestroy() {

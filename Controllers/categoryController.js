@@ -8,7 +8,7 @@ module.exports.getAllCategories = async function(request, response) {
         const categories = await Category.find({user: request.user.id})
         response.status(200).json(categories)
     } catch(error) {
-        errorHandler(response, e)
+        errorHandler(response, error)
     }
 }
 
@@ -30,7 +30,7 @@ module.exports.deleteCategory = async function(request, response) {
             message: 'Категория удалена.'
         })
     } catch(error) {
-        errorHandler(response, e)
+        errorHandler(response, error)
     }
 }
 
@@ -67,6 +67,6 @@ module.exports.updateCategory = async function(request, response) {
         )
         response.status(200).json(category)
     } catch(error) {
-        errorHandler(response, e)
+        errorHandler(response, error)
     }
 }
