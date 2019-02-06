@@ -13,4 +13,8 @@ export class PositionsService {
   getAllPositions(categoryId: string): Observable<Position[]> {
     return this.http.get<Position[]>(`/api/position/${categoryId}`)
   }
+
+  createPosition(position: Position): Observable<Position> {
+    return this.http.post<Position>(`/api/position/`, position)
+  }
 }

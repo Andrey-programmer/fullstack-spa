@@ -58,11 +58,33 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onSubmit() {
+    this.form.disable()
+    const newPosition: Position = {
+      name: this.form.value.name,
+      cost: this.form.value.cost,
+      category: this.categoryId
+    }
 
+    this.positionService.createPosition(newPosition)
+    .subscribe(
+      position => {
+        MaterialService.toast('Позиция создана')
+        this.positions.push(position)
+      },
+      error => {
+        this.form.enable()
+          MaterialService.toast(error.error.message)
+      },
+      () => {
+        this.modal.close()
+        this.form.reset()
+        this.form.enable()
+      }
+    )
   }
 
   onDeletePosition() {
-    
+
   }
 
   ngOnDestroy() {
