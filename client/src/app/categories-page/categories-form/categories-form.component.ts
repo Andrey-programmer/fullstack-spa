@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core'
-import { ActivatedRoute, Params } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import { of } from 'rxjs'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { switchMap } from 'rxjs/operators'
 
 import { CategoriesService } from 'src/app/shared/services/categories.service'
 import { MaterialService } from 'src/app/shared/services/material.service'
-import { Category } from 'src/app/shared/interfaces/interfaces';
+import { Category} from 'src/app/shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-categories-form',
@@ -23,7 +23,11 @@ export class CategoriesFormComponent implements OnInit {
   imagePreview: any
   category: Category
 
-  constructor(private route: ActivatedRoute, private categoriesService: CategoriesService) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private categoriesService: CategoriesService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -107,6 +111,19 @@ export class CategoriesFormComponent implements OnInit {
       this.imagePreview = reader.result
     }
  
+  }
+
+  deleteCategory() {
+    //Подтверждение удаления категории
+    const message = window.confirm(`Вы уверены что хотите удалить категорию ${this.category.name}?`)
+    if(message) {
+      this.categoriesService.deleteCategory(this.category._id)
+        .subscribe(
+          response => MaterialService.toast(response.message),
+          error => MaterialService.toast(error.error.message),
+          () => this.router.navigate(['/categories'])
+        )
+    }
   }
 
 }
