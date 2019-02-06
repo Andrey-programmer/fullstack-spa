@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators'
 
 import { CategoriesService } from 'src/app/shared/services/categories.service'
 import { MaterialService } from 'src/app/shared/services/material.service'
-import { Category} from 'src/app/shared/interfaces/interfaces';
+import { Category} from 'src/app/shared/interfaces/interfaces'
 
 @Component({
   selector: 'app-categories-form',
