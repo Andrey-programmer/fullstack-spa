@@ -47,6 +47,7 @@ export class OrderService {
   }
 
   clear() {
-
+    this.list = []
+    this.price = 0
   }
 }

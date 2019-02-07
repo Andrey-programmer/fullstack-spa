@@ -54,12 +54,15 @@
       <button 
         class="modal-action waves-effect waves-black btn-flat"
         (click)="modalCancel()"
-      >Отмена</button>
+        [disabled]="loading"
+      >
+        Отмена
+      </button>
       <button 
         class="modal-action btn waves-effect"
         (click)="onSubmit()"
-        [disabled]="order.list.length === 0"
-        >
+        [disabled]="order.list.length === 0 || loading"
+      >
         Подтвердить
       </button>
   </div>
