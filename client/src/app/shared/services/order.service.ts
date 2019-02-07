@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
+
+import { Position } from '../interfaces/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +9,15 @@ export class OrderService {
 
   constructor() { }
 
-  add() {
+  add(position: Position) {
 
   }
 
   remove() {
-
+ 
   }
 
   clear() {
-    
+
   }
 }
