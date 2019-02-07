@@ -15,7 +15,7 @@ export class OrderPageComponent implements OnInit, OnDestroy, AfterViewInit {
   isRoot: boolean
   modal: ModalOptions
 
-  constructor(private router: Router, private orderService: OrderService) { }
+  constructor(private router: Router, private order: OrderService) { }
 
   ngOnInit() {
     this.isRoot = this.router.url === '/order'
