@@ -83,13 +83,15 @@ export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy 
     if(this.positionId) {
       
       newPosition._id = this.positionId
+      console.log(newPosition._id)
       this.positionService.updatePosition(newPosition)
       .subscribe(
         position => {
-          const index = this.positions.findIndex(pos => pos._id === position._id)
-          this.positions[index] = position
-          console.log(this.positions[index])
-          console.log(position)
+          const index = this.positions.findIndex(pos => 
+            { 
+              return pos._id === position.position._id
+            })
+          this.positions[index] = position.position
           MaterialService.toast('Изменения сохранены')
         },
         error => {
