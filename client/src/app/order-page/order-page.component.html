@@ -8,6 +8,7 @@
     <button 
         class="waves-effect btn grey darken-1"
         (click)="modalOpen()"
+        [disabled]="order.list.length === 0"
     >
         Завершить
     </button>
@@ -34,7 +35,14 @@
               <td>{{item.name}}</td>
               <td>{{item.quantity}}</td>
               <td>{{item.cost}}</td>
-              <td><i class="material-icons pointer">delete</i></td>
+              <td>
+                  <i 
+                    class="material-icons pointer"
+                    (click)="removePosition(item)"
+                  >
+                    delete
+                  </i>
+                </td>
           </tr>
           </tbody>
       </table>
@@ -50,7 +58,10 @@
       <button 
         class="modal-action btn waves-effect"
         (click)="onSubmit()"
-      >Подтвердить</button>
+        [disabled]="order.list.length === 0"
+        >
+        Подтвердить
+      </button>
   </div>
 </div>
 
