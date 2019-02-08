@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core'
+import { Component, Input, ViewChild, ElementRef, OnDestroy, AfterViewInit, OnInit } from '@angular/core'
 
 import { Order } from 'src/app/shared/interfaces/interfaces'
 import { ModalOptions, MaterialService } from 'src/app/shared/services/material.service';
@@ -17,13 +17,12 @@ export class HistoryListComponent implements OnDestroy, AfterViewInit {
   modal: ModalOptions
 
   constructor() { }
- 
 
   selectOrder(order: Order) {
     console.log(order)
     this.selectedOrder = order
     console.log(this.modal)
-    // this.modal.open()
+    this.modal.open()
   }
 
   computedPrice(order: Order): number {
@@ -37,10 +36,10 @@ export class HistoryListComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    MaterialService.initModal(this.modalRef)
+    this.modal = MaterialService.initModal(this.modalRef)
   }
 
   ngOnDestroy() {
-    // this.modal.destroy()
+    this.modal.destroy()
   }
 }
