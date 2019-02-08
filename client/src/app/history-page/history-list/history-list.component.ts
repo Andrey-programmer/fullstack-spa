@@ -17,11 +17,13 @@ export class HistoryListComponent implements OnDestroy, AfterViewInit {
   modal: ModalOptions
 
   constructor() { }
-
+ 
 
   selectOrder(order: Order) {
+    console.log(order)
     this.selectedOrder = order
-    this.modal.open()
+    console.log(this.modal)
+    // this.modal.open()
   }
 
   computedPrice(order: Order): number {
@@ -34,11 +36,11 @@ export class HistoryListComponent implements OnDestroy, AfterViewInit {
     this.modal.close()
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     MaterialService.initModal(this.modalRef)
   }
 
-  ngOnDestroy(): void {
-    this.modal.destroy()
+  ngOnDestroy() {
+    // this.modal.destroy()
   }
 }
