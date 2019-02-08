@@ -43,3 +43,4 @@ export class HistoryListComponent implements OnDestroy, AfterViewInit {
     this.modal.destroy()
   }
 }
+ 

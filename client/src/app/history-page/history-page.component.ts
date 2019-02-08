@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } fr
 import { TooltipOptions, MaterialService } from '../shared/services/material.service';
 import { OrderCompleteService } from '../shared/services/order-complete.service';
 import { Subscription } from 'rxjs';
-import { Order } from '../shared/interfaces/interfaces';
+import { Order, Filter } from '../shared/interfaces/interfaces';
 
 const STEP: number = 3
 
@@ -46,6 +46,10 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loading = false
       this.reloading = false
     })
+  }
+
+  applyFilter(filter: Filter) {
+    
   }
 
   loadMore() {

@@ -15,6 +15,10 @@ export interface TooltipOptions {
   destroy?() : void
 }
 
+export interface MaterialDatePicker extends ModalOptions {
+  date?: Date
+}
+
 export class MaterialService {
   static toast(message: string) {
     M.toast({html: message})
@@ -34,5 +38,13 @@ export class MaterialService {
 
   static initialTooltip(ref: ElementRef): TooltipOptions {
     return M.Tooltip.init(ref.nativeElement)
+  }
+
+  static initDate(ref: ElementRef, onClose: () => void) {
+    return M.Datepicker.init(ref.nativeElement, {
+      format: 'dd.mm.yyyy',
+      showClearBtn: true,
+      onClose
+    })
   }
 }
