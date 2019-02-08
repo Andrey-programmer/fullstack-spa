@@ -4,9 +4,15 @@ declare var M //Искусственно показываем что перем�
 // На самом деле она подключается в main.js библиотекой materialize
 
 export interface ModalOptions {
-  open?() : void,
-  close?() : void,
-  destroy?() : void,
+  open?() : void
+  close?() : void
+  destroy?() : void
+}
+
+export interface TooltipOptions {
+  open?() : void
+  close?() : void
+  destroy?() : void
 }
 
 export class MaterialService {
@@ -24,5 +30,9 @@ export class MaterialService {
 
   static initModal(ref: ElementRef): ModalOptions {
     return M.Modal.init(ref.nativeElement)
+  }
+
+  static initialTooltip(ref: ElementRef): TooltipOptions {
+    return M.Tooltip.init(ref.nativeElement)
   }
 }
