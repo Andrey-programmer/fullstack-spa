@@ -3,7 +3,8 @@
   <button 
     class="btn btn-smallo"
     [ngClass]="{
-        'active': isFilterVisible
+        'active': isFilterVisible,
+        'red': isFiltered()
     }"
     data-tooltip="Открыть фильтр"
     data-position="left"
@@ -16,6 +17,7 @@
 
 <app-history-filter 
     *ngIf="isFilterVisible"
+    [loadFilter] = "reloading"
     (onFilter)="applyFilter($event)"
 >
 </app-history-filter>

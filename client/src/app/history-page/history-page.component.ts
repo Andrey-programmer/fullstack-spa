@@ -11,6 +11,7 @@ const STEP: number = 3
   templateUrl: './history-page.component.html',
   styleUrls: ['./history-page.component.css']
 })
+
 export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('tooltip') tooltipRef: ElementRef
@@ -18,6 +19,7 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   aSub: Subscription
   tooltip: TooltipOptions
   orders: Order[] = []
+  filter: Filter = {}
 
   offset: number = 0
   limit: number = STEP
@@ -35,10 +37,15 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getOrders() {
-    const params = {
-      offset: this.offset, 
+    // const params = {
+    //   offset: this.offset, 
+    //   limit: this.limit
+    // }
+    const params = Object.assign({}, this.filter, {
+      offset: this.offset,
       limit: this.limit
-    }
+    })
+
     this.aSub = this.ordersServise.getOrders(params)
     .subscribe((orders) =>{
       this.orders = this.orders.concat(orders)
@@ -49,7 +56,15 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   applyFilter(filter: Filter) {
-    
+    this.orders = []
+    this.offset = 0
+    this.filter = filter
+    this.reloading = true
+    this.getOrders()
+  }
+
+  isFiltered(): boolean {
+    return Object.keys(this.filter).length !==0
   }
 
   loadMore() {

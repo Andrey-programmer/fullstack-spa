@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core'
+import { Component, Output, EventEmitter, ViewChild, ElementRef, OnDestroy, AfterViewInit, Input } from '@angular/core'
 
 import { Filter } from 'src/app/shared/interfaces/interfaces'
 import { MaterialService, MaterialDatePicker } from 'src/app/shared/services/material.service'
@@ -14,11 +14,13 @@ export class HistoryFilterComponent implements OnDestroy, AfterViewInit {
   @ViewChild('start') startInputRef: ElementRef
   @ViewChild('end') endInputRef: ElementRef
   @Output() onFilter = new EventEmitter<Filter>()
+  @Input() loadFilter: boolean
 
   order: number
   start: MaterialDatePicker
   end: MaterialDatePicker
   isValid = true
+
 
  
   constructor() { }
