@@ -4,7 +4,7 @@ import { OrderCompleteService } from '../shared/services/order-complete.service'
 import { Subscription } from 'rxjs';
 import { Order } from '../shared/interfaces/interfaces';
 
-const STEP: number = 2
+const STEP: number = 3
 
 @Component({
   selector: 'app-history-page',
