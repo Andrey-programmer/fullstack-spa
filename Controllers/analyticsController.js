@@ -1,11 +1,11 @@
-const momen = require('moment')
+const moment = require('moment')
 const Order = require('../Models/Order')
 const errorHandler = require('../Utils/errorHandler')
 
 module.exports.overview = async function(request, response) {
     try {
         // сортируем массив заказов по возрастанию
-        const allOrders = await Order.find({user: request.user.id}).sort(1)
+        const allOrders = await Order.find({user: request.user.id}).sort({date: 1})
         const ordersMap = getOrdersMap(allOrders)
         // Заказы за вчера
         const yesterdayOrders = ordersMap[moment().add(-1, 'd').format('DD.MM.YYYY')] || []

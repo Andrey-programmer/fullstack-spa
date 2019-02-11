@@ -44,3 +44,15 @@ export interface Filter {
     end?: Date
     order?: number
 }
+
+export interface OverviewPage {
+    money: OverviewPageItem
+    orders: OverviewPageItem
+}
+
+export interface OverviewPageItem {
+    percent: number
+    compire: number
+    yesterday: number
+    isHigher: boolean
+}
