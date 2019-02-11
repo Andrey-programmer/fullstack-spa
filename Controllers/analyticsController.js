@@ -97,7 +97,7 @@ function calculatePrice(orders = []) {
 
 module.exports.analytics = async function(request, response) {
     try {
-        const allOrders = Order.find({user: request.user.id}).sort({date: 1})
+        const allOrders = await Order.find({user: request.user.id}).sort({date: 1})
         const ordersMap = getOrdersMap(allOrders)
 
         // Получаем средний чек
