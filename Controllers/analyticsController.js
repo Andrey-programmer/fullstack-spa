@@ -54,9 +54,7 @@ module.exports.overview = async function(request, response) {
         errorHandler(response, error)
     }
 }
-module.exports.analytics = function(request, response) {
-    response.get('/overview') 
-} 
+
 
 function getOrdersMap(orders = []) {
     const daysOrder = {}
@@ -95,3 +93,35 @@ function calculatePrice(orders = []) {
         return total += orderPrice
     }, 0)
 }
+
+
+module.exports.analytics = async function(request, response) {
+    try {
+        const allOrders = Order.find({user: request.user.id}).sort({date: 1})
+        const ordersMap = getOrdersMap(allOrders)
+
+        // Получаем средний чек
+        const average = +(calculatePrice(allOrders) / Object.keys(ordersMap).length).toFixed(2)
+
+        // Формируем данные для графиков
+        const chart = Object.keys(ordersMap).map(label => {
+            // label = 05.05.2018
+        const money = calculatePrice(ordersMap[label])
+        const order = ordersMap[label].length
+
+            return {
+                label,
+                order,
+                money
+            }
+        })
+
+        response.status(200).json({
+            average,
+            chart
+        })
+    } catch(error) {
+        errorHandler(response, error)
+    }
+    response.get('/overview') 
+} 

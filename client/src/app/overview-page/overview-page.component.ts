@@ -16,11 +16,13 @@ export class OverviewPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('tapTarget') tapTargetRef: ElementRef
   tapTarget: ModalOptions
   data$: Observable<OverviewPage>
+  yesterday = new Date()
 
   constructor(private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
     this.data$ = this.analyticsService.getOverview() 
+    this.yesterday.setDate(this.yesterday.getDate() - 1)
   }
 
   ngAfterViewInit(): void {
