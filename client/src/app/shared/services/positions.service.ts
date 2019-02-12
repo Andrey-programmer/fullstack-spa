@@ -18,8 +18,10 @@ export class PositionsService {
     return this.http.post<Position>(`/api/position/`, position)
   }
 
-  updatePosition(position: Position): Observable<Position> {
-    return this.http.patch<Position>(`/api/position/${position._id}`, position)
+  // Тут прописываю any так как почему то возвращается объект Position 
+  // а должно быть <Position> (сама позиция)
+  updatePosition(position: Position): Observable<any> {
+    return this.http.patch<any>(`/api/position/${position._id}`, position)
   }
 
   deletePosition(position: Position): Observable<Message> {

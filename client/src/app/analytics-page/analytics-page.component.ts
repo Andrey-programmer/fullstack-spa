@@ -59,8 +59,10 @@ export class AnalyticsPageComponent implements AfterViewInit, OnDestroy {
 
       const moneyContext = this.moneyRef.nativeElement.getContext('2d')
       moneyContext.canvas.height = '300px'
+      moneyContext.canvas.width = '400px'
       const orderContext = this.ordersRef.nativeElement.getContext('2d')
       orderContext.canvas.height = '300px'
+      orderContext.canvas.width = '400px'
 
       this.average = data.average
 

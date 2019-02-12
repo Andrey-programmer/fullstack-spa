@@ -6,9 +6,12 @@ module.exports.overview = async function(request, response) {
     try {
         // сортируем массив заказов по возрастанию
         const allOrders = await Order.find({user: request.user.id}).sort({date: 1})
+        
         const ordersMap = getOrdersMap(allOrders)
         // Заказы за вчера
-        const yesterdayOrders = ordersMap[moment().add(-1, 'd').format('DD.MM.YYYY')] || []
+        const yesterdayOrders = ordersMap[moment().add(-1, 'day').format('DD.MM.YYYY')] || []
+        // console.log('OrdersMap', ordersMap)
+        // console.log('AllOrtders', allOrders)
         // Количество заказов за вчера
         const yesterdayOrdersNumber = yesterdayOrders.length
 
@@ -67,9 +70,10 @@ function getOrdersMap(orders = []) {
 
         if(!daysOrder[date]) {
             daysOrder[date] = []
-        } else {
-            daysOrder[date].push(order)
-        }
+        } 
+        
+        daysOrder[date].push(order)
+        
 
         // По факту тут формируется объект из массива дат в которые входит массив объектов заказов
 // daysOrder {
