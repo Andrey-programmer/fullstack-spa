@@ -46,16 +46,16 @@ export class AnalyticsPageComponent implements AfterViewInit, OnDestroy {
       orderConfig.data = data.chart.map(item => item.order)
 
       // **** Money ****
-      moneyConfig.labels.push('04.02.2018')
+      /* moneyConfig.labels.push('04.02.2018')
       moneyConfig.labels.push('02.02.2018')
       moneyConfig.data.push(1500)
-      moneyConfig.data.push(700)
+      moneyConfig.data.push(700) */
 
       // **** Orders ****
-      orderConfig.labels.push('04.02.2018')
+      /* orderConfig.labels.push('04.02.2018')
       orderConfig.labels.push('02.02.2018')
       orderConfig.data.push(8)
-      orderConfig.data.push(2)
+      orderConfig.data.push(2) */
 
       const moneyContext = this.moneyRef.nativeElement.getContext('2d')
       moneyContext.canvas.height = '300px'
