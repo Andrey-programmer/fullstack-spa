@@ -12,6 +12,9 @@ const routes: Routes = [
       {path: 'register', component:  RegisterPageComponent},
     ]
   },
+  {
+    path: '', loadChildren: './shared/layouts/system-layout/system-layouts.module#SystemLayoutsModule'
+  }
   
 ]; 
 

@@ -9,7 +9,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { RegisterPageComponent } from './register-page/register-page.component'
 import { TokenInterceptor } from './shared/services/token.interceptors'
 import { LoaderModule } from './shared/components/loader/loader.module';
-import { SystemLayoutsModule } from './shared/layouts/system-layout/system-layouts.module';
+// import { SystemLayoutsModule } from './shared/layouts/system-layout/system-layouts.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { SystemLayoutsModule } from './shared/layouts/system-layout/system-layou
     ReactiveFormsModule,
     HttpClientModule,
     LoaderModule,
-    SystemLayoutsModule
+    // SystemLayoutsModule
   ],
   providers: [
     {
